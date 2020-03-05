@@ -188,7 +188,7 @@ class _RegisterPageState extends State<RegisterPage> {
         new Container(
           margin: const EdgeInsets.only(top: 15.0),
           child: new Text(
-            widget.labelInputUsername != null ? widget.labelInputUsername : 'No HP',
+            widget.labelInputUsername != null ? widget.labelInputUsername : 'No. HP',
             style: TextStyle(
               color: Colors.black,
               fontSize: 15.0,
@@ -206,7 +206,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Icons.phone,
                 color: Color(0XFF8A8A8A),
               ),
-              hintText: widget.labelInputUsername != null ? widget.labelInputUsername : 'No HP',
+              hintText: widget.labelInputUsername != null ? widget.labelInputUsername : 'No. HP',
               contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
             ),
