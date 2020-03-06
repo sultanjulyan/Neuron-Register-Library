@@ -22,7 +22,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +29,24 @@ class _HomeScreenState extends State<HomeScreen> {
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-        child: RegisterPage(),
+        child: RegisterPage(
+          onButtonTap: (onValue) {
+            print(onValue.username);
+            print(onValue.password);
+            print(onValue.name);
+            print(onValue.phone);
+          },
+          buttonColor: Colors.red,
+          splashButtonColor: Colors.grey,
+          buttonText: 'SELANJUTNYA',
+          buttonTextColor: Colors.white,
+          onTextLoginTap: (onValue) {
+            print('onTextLoginTap $onValue');
+          },
+          textLogin: true,
+          buttonGoogleShow: true,
+          buttonFacebookShow: true,
+        ),
       ),
     );
   }

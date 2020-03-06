@@ -1,8 +1,10 @@
 class FormUser {
   String username;
   String password;
+  String name;
+  String phone;
 
-  FormUser({this.username, this.password});
+  FormUser({this.username, this.password, this.name, this.phone});
 
   FormUser.fromJson(Map<String, dynamic> json) {
     username = json['username'];

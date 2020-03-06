@@ -4,24 +4,36 @@ import 'model/form_user.dart';
 
 class RegisterPage extends StatefulWidget {
   final ValueChanged<FormUser> onButtonTap;
+  final ValueChanged<bool> onTextLoginTap;
   final Color buttonColor;
   final Color splashButtonColor;
   final String buttonText;
   final Color buttonTextColor;
   final String labelInputUsername;
   final String labelInputPassword;
+  final String labelInputName;
+  final String labelInputPhone;
   final String base64Image;
+  final bool textLogin;
+  final bool buttonFacebookShow;
+  final bool buttonGoogleShow;
 
   const RegisterPage(
       {Key key,
       this.onButtonTap,
+      this.onTextLoginTap,
       this.buttonColor,
       this.splashButtonColor,
       this.buttonText,
       this.buttonTextColor,
       this.labelInputUsername,
       this.labelInputPassword,
-      this.base64Image})
+      this.labelInputName,
+      this.labelInputPhone,
+      this.base64Image,
+      this.textLogin,
+      this.buttonFacebookShow,
+      this.buttonGoogleShow})
       : super(key: key);
 
   @override
@@ -31,6 +43,8 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
   bool isLoggedIn = false;
   bool isHidden = true;
 
@@ -53,6 +67,31 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool _isTextLoginShow;
+    bool _isTextOrShow = false;
+    bool _isButtonFacebookShow;
+    bool _isButtonGoogleShow;
+
+    if (widget.textLogin != null) {
+      _isTextLoginShow = widget.textLogin;
+    } else {
+      _isTextLoginShow = false;
+    }
+
+    if (widget.buttonGoogleShow != null) {
+      _isButtonGoogleShow = widget.buttonGoogleShow;
+      _isTextOrShow = widget.buttonGoogleShow;
+    } else {
+      _isButtonGoogleShow = false;
+    }
+
+    if (widget.buttonFacebookShow != null) {
+      _isButtonFacebookShow = widget.buttonFacebookShow;
+      _isTextOrShow = widget.buttonFacebookShow;
+    } else {
+      _isButtonFacebookShow = false;
+    }
+
     final imageLayout = new Container(
       margin: const EdgeInsets.only(top: 50.0),
       child: new Center(
@@ -115,7 +154,7 @@ class _RegisterPageState extends State<RegisterPage> {
         new Container(
           margin: const EdgeInsets.only(top: 15.0),
           child: new Text(
-            widget.labelInputUsername != null ? widget.labelInputUsername : 'Nama',
+            widget.labelInputName != null ? widget.labelInputName : 'Nama',
             style: TextStyle(
               color: Colors.black,
               fontSize: 15.0,
@@ -125,15 +164,14 @@ class _RegisterPageState extends State<RegisterPage> {
         new Container(
           margin: const EdgeInsets.only(top: 5.0),
           child: new TextFormField(
-            controller: emailController,
-            keyboardType: TextInputType.emailAddress,
+            controller: nameController,
             autofocus: false,
             decoration: InputDecoration(
               prefixIcon: new Icon(
                 Icons.person,
                 color: Color(0XFF8A8A8A),
               ),
-              hintText: widget.labelInputUsername != null ? widget.labelInputUsername : 'Nama',
+              hintText: widget.labelInputName != null ? widget.labelInputName : 'Nama',
               contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
             ),
@@ -188,7 +226,7 @@ class _RegisterPageState extends State<RegisterPage> {
         new Container(
           margin: const EdgeInsets.only(top: 15.0),
           child: new Text(
-            widget.labelInputUsername != null ? widget.labelInputUsername : 'No. HP',
+            widget.labelInputPhone != null ? widget.labelInputPhone : 'No. HP',
             style: TextStyle(
               color: Colors.black,
               fontSize: 15.0,
@@ -198,15 +236,15 @@ class _RegisterPageState extends State<RegisterPage> {
         new Container(
           margin: const EdgeInsets.only(top: 5.0),
           child: new TextFormField(
-            controller: emailController,
-            keyboardType: TextInputType.emailAddress,
+            controller: phoneController,
+            keyboardType: TextInputType.number,
             autofocus: false,
             decoration: InputDecoration(
               prefixIcon: new Icon(
                 Icons.phone,
                 color: Color(0XFF8A8A8A),
               ),
-              hintText: widget.labelInputUsername != null ? widget.labelInputUsername : 'No. HP',
+              hintText: widget.labelInputPhone != null ? widget.labelInputPhone : 'No. HP',
               contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
             ),
@@ -223,7 +261,11 @@ class _RegisterPageState extends State<RegisterPage> {
         splashColor: widget.splashButtonColor,
         onPressed: () {
           widget.onButtonTap(
-            new FormUser(username: emailController.text, password: passwordController.text),
+            new FormUser(
+                username: emailController.text,
+                password: passwordController.text,
+                name: nameController.text,
+                phone: phoneController.text),
           );
         },
         child: Text(widget.buttonText != null ? widget.buttonText : 'SELANJUTNYA'),
@@ -233,24 +275,26 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
 
-    final labelAlreadyAccount = new Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        new Text(
-          'Sudah Punya Akun? ',
-          style: TextStyle(color: Colors.grey),
-        ),
-        GestureDetector(
-          child: new Text(
-            'Login',
-            style: TextStyle(color: Color(0XFF24A5F3)),
+    final labelAlreadyAccount = GestureDetector(
+      child: new Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new Text(
+            'Sudah Punya Akun? ',
+            style: TextStyle(color: Colors.grey),
           ),
-          onTap: () {
-            Navigator.pushNamed(context, '/LoginPage');
-          },
-        ),
-      ],
+          GestureDetector(
+            child: new Text(
+              'Login',
+              style: TextStyle(color: Color(0XFF24A5F3)),
+            ),
+            onTap: () {
+              widget.onTextLoginTap(true);
+            },
+          ),
+        ],
+      ),
     );
 
     final labelSeparator = new Container(
@@ -366,14 +410,14 @@ class _RegisterPageState extends State<RegisterPage> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
-                        labelSeparator,
+                        _isTextOrShow ? labelSeparator : Container(),
                         new Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
-                            buttonLoginFacebook,
-                            buttonLoginGoogle
+                            _isButtonFacebookShow ? buttonLoginFacebook : Container(),
+                            _isButtonGoogleShow ? buttonLoginGoogle : Container()
                           ],
                         ),
                       ],
@@ -382,13 +426,15 @@ class _RegisterPageState extends State<RegisterPage> {
                 ],
               ),
             ),
-            Container(
-              height: MediaQuery.of(context).size.height - 25,
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: labelAlreadyAccount,
-              ),
-            ),
+            _isTextLoginShow
+                ? Container(
+                    height: MediaQuery.of(context).size.height - 25,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: labelAlreadyAccount,
+                    ),
+                  )
+                : Container(),
           ],
         ),
       ),
