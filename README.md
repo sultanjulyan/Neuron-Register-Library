@@ -84,7 +84,7 @@ import 'package:neuron_register/neuron_register.dart';
 
 ## UI
 
-![image](/uploads/afafbe821dbbd52a354eb239cebdbb3d/image.png)
+![image](/uploads/aa918dd8560c9359043c16a098dfe1fd/image.png)
 
 ## Getting Started
 
