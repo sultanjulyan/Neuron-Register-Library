@@ -5,6 +5,8 @@ import 'model/form_user.dart';
 class RegisterPage extends StatefulWidget {
   final ValueChanged<FormUser> onButtonTap;
   final ValueChanged<bool> onTextLoginTap;
+  final ValueChanged<bool> onButtonGoogleTap;
+  final ValueChanged<bool> onButtonFacebookTap;
   final Color buttonColor;
   final Color splashButtonColor;
   final String buttonText;
@@ -13,15 +15,22 @@ class RegisterPage extends StatefulWidget {
   final String labelInputPassword;
   final String labelInputName;
   final String labelInputPhone;
-  final String base64Image;
+  final bool showLabelInputUsername;
+  final bool showLabelInputPassword;
+  final bool showLabelInputName;
+  final bool showLabelInputPhone;
   final bool textLogin;
   final bool buttonFacebookShow;
   final bool buttonGoogleShow;
+  final String assetFacebookButton;
+  final String assetGoogleButton;
 
   const RegisterPage(
       {Key key,
       this.onButtonTap,
       this.onTextLoginTap,
+      this.onButtonGoogleTap,
+      this.onButtonFacebookTap,
       this.buttonColor,
       this.splashButtonColor,
       this.buttonText,
@@ -30,10 +39,15 @@ class RegisterPage extends StatefulWidget {
       this.labelInputPassword,
       this.labelInputName,
       this.labelInputPhone,
-      this.base64Image,
+      this.showLabelInputUsername,
+      this.showLabelInputPassword,
+      this.showLabelInputName,
+      this.showLabelInputPhone,
       this.textLogin,
       this.buttonFacebookShow,
-      this.buttonGoogleShow})
+      this.buttonGoogleShow,
+      this.assetFacebookButton,
+      this.assetGoogleButton})
       : super(key: key);
 
   @override
@@ -71,6 +85,10 @@ class _RegisterPageState extends State<RegisterPage> {
     bool _isTextOrShow = false;
     bool _isButtonFacebookShow;
     bool _isButtonGoogleShow;
+    bool _isShowLabelInputUsername;
+    bool _isShowLabelInputPassword;
+    bool _isShowLabelInputName;
+    bool _isShowLabelInputPhone;
 
     if (widget.textLogin != null) {
       _isTextLoginShow = widget.textLogin;
@@ -92,20 +110,29 @@ class _RegisterPageState extends State<RegisterPage> {
       _isButtonFacebookShow = false;
     }
 
-    final imageLayout = new Container(
-      margin: const EdgeInsets.only(top: 50.0),
-      child: new Center(
-        child: new Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Container(
-              height: 130.0,
-              child: widget.base64Image != null ? Image.asset(widget.base64Image) : new Container(),
-            ),
-          ],
-        ),
-      ),
-    );
+    if (widget.showLabelInputUsername != null) {
+      _isShowLabelInputUsername = widget.showLabelInputUsername;
+    } else {
+      _isShowLabelInputUsername = true;
+    }
+
+    if (widget.showLabelInputPassword != null) {
+      _isShowLabelInputPassword = widget.showLabelInputPassword;
+    } else {
+      _isShowLabelInputPassword = true;
+    }
+
+    if (widget.showLabelInputName != null) {
+      _isShowLabelInputName = widget.showLabelInputName;
+    } else {
+      _isShowLabelInputName = true;
+    }
+
+    if (widget.showLabelInputPhone != null) {
+      _isShowLabelInputPhone = widget.showLabelInputPhone;
+    } else {
+      _isShowLabelInputPhone = true;
+    }
 
     final labelForm = new Container(
       margin: const EdgeInsets.only(top: 20.0),
@@ -339,13 +366,15 @@ class _RegisterPageState extends State<RegisterPage> {
                 width: 25.0,
                 decoration: new BoxDecoration(
                   image: DecorationImage(
-                    image: new AssetImage('assets/images/facebook.png'),
+                    image: new AssetImage(widget.assetFacebookButton),
                     fit: BoxFit.fill,
                   ),
                 ),
               ),
               new FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  widget.onButtonFacebookTap(true);
+                },
                 child: Text('Lanjutkan dengan Facebook'),
                 textColor: Colors.white,
               ),
@@ -371,13 +400,15 @@ class _RegisterPageState extends State<RegisterPage> {
                 width: 40.0,
                 decoration: new BoxDecoration(
                   image: DecorationImage(
-                    image: new AssetImage('assets/images/google.png'),
+                    image: new AssetImage(widget.assetGoogleButton),
                     fit: BoxFit.fill,
                   ),
                 ),
               ),
               new FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  widget.onButtonGoogleTap(true);
+                },
                 child: Text('Lanjutkan dengan Google'),
                 textColor: Colors.white,
               ),
@@ -399,10 +430,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   labelForm,
-                  labelInputUsername,
-                  labelInputPassword,
-                  labelInputName,
-                  labelInputPhone,
+                  _isShowLabelInputUsername ? labelInputUsername : new Container(),
+                  _isShowLabelInputPassword ? labelInputPassword : new Container(),
+                  _isShowLabelInputName ? labelInputName : new Container(),
+                  _isShowLabelInputPhone ? labelInputPhone : new Container(),
                   buttonRegister,
                   new Container(
                     child: new Column(

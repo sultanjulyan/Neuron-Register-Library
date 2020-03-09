@@ -46,6 +46,22 @@ class _HomeScreenState extends State<HomeScreen> {
           textLogin: true,
           buttonGoogleShow: true,
           buttonFacebookShow: true,
+          labelInputUsername: 'E-Mail',
+          labelInputPassword: 'Password',
+          labelInputName: 'Nama',
+          labelInputPhone: 'No. HP',
+          onButtonGoogleTap: (onValue) {
+            print('onButtonGoogleTap $onValue');
+          },
+          onButtonFacebookTap: (onValue) {
+            print('onButtonFacebookTap $onValue');
+          },
+          assetFacebookButton: 'assets/images/facebook.png',
+          assetGoogleButton: 'assets/images/google.png',
+          showLabelInputUsername: true,
+          showLabelInputPassword: true,
+          showLabelInputName: true,
+          showLabelInputPhone: true,
         ),
       ),
     );
