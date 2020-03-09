@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onTextLoginTap: (onValue) {
             print('onTextLoginTap $onValue');
           },
-          textLogin: true,
+          showTextLogin: true,
           buttonGoogleShow: true,
           buttonFacebookShow: true,
           labelInputUsername: 'E-Mail',
@@ -62,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
           showLabelInputPassword: true,
           showLabelInputName: true,
           showLabelInputPhone: true,
+          orText: 'Atau',
         ),
       ),
     );

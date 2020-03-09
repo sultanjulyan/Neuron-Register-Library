@@ -39,7 +39,7 @@ import 'package:neuron_register/neuron_register.dart';
     onTextLoginTap: (onValue) {
       print('onTextLoginTap $onValue');
     },
-    textLogin: true,
+    showTextLogin: true,
     buttonGoogleShow: true,
     buttonFacebookShow: true,
     labelInputUsername: 'E-Mail',
@@ -58,6 +58,7 @@ import 'package:neuron_register/neuron_register.dart';
     showLabelInputPassword: true,
     showLabelInputName: true,
     showLabelInputPhone: true,
+    orText: 'Atau',
   ),
 ```
 
@@ -67,20 +68,25 @@ import 'package:neuron_register/neuron_register.dart';
 | splashButtonColor | Set splash button submit color |
 | buttonText | Set text for button submit |
 | buttonTextColor | Set text color for button submit |
-| base64Image | Image asset link |
-| forgotPassword | Show or hide forgot password |
-| forgotPasswordText | Set text for forgot password text |
-| forgotPasswordTextColor | Set text color for forgot password |
-| buttonRegisterColor | Set color for button register |
-| splashButtonRegisterColor | Set splash button register color |
-| buttonRegisterText | Set text for button register |
-| buttonRegisterTextColor | Set text color for button register |
-| buttonRegister | Show or hide button register |
 | labelInputUsername | Label and hint text for input username |
 | labelInputPassword | Label and hint text for input password |
-| onButtonTap | Return if button login tapped | String username<br>String password<br>boolean rememberMe |
-| onForgotPasswordTap | Return if text forgot password tapped | boolean |
-| onButtonRegisterTap | Return if button register tapped | boolean |
+| labelInputName | Label and hint text for input name |
+| labelInputPhone | Label and hint text for input phone |
+| showLabelInputUsername | Show or hide label and text input username |
+| showLabelInputPassword | Show or hide label and text input password |
+| showLabelInputName | Show or hide label and text input name |
+| showLabelInputPhone | Show or hide label and text input phone |
+| showTextLogin | Show or hide text login label |
+| buttonFacebookShow | Show or hide button sign up wih facebook |
+| buttonGoogleShow | Show or hide button sign up wih google |
+| assetFacebookButton | Set logo facebook |
+| assetGoogleButton | Set logo google |
+| onButtonTap | Return if button login tapped | String username<br>String password<br>String name<br>String phone |
+| onTextLoginTap | Return if button login tapped |
+| onButtonGoogleTap | Return if button google tapped |
+| onButtonFacebookTap | Return if button facebook tapped |
+| orText | Set or text |
+
 
 ## UI
 

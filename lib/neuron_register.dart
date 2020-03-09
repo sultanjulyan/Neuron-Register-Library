@@ -19,11 +19,12 @@ class RegisterPage extends StatefulWidget {
   final bool showLabelInputPassword;
   final bool showLabelInputName;
   final bool showLabelInputPhone;
-  final bool textLogin;
+  final bool showTextLogin;
   final bool buttonFacebookShow;
   final bool buttonGoogleShow;
   final String assetFacebookButton;
   final String assetGoogleButton;
+  final String orText;
 
   const RegisterPage(
       {Key key,
@@ -43,11 +44,12 @@ class RegisterPage extends StatefulWidget {
       this.showLabelInputPassword,
       this.showLabelInputName,
       this.showLabelInputPhone,
-      this.textLogin,
+      this.showTextLogin,
       this.buttonFacebookShow,
       this.buttonGoogleShow,
       this.assetFacebookButton,
-      this.assetGoogleButton})
+      this.assetGoogleButton,
+      this.orText})
       : super(key: key);
 
   @override
@@ -90,8 +92,8 @@ class _RegisterPageState extends State<RegisterPage> {
     bool _isShowLabelInputName;
     bool _isShowLabelInputPhone;
 
-    if (widget.textLogin != null) {
-      _isTextLoginShow = widget.textLogin;
+    if (widget.showTextLogin != null) {
+      _isTextLoginShow = widget.showTextLogin;
     } else {
       _isTextLoginShow = false;
     }
@@ -337,7 +339,7 @@ class _RegisterPageState extends State<RegisterPage> {
           Container(
             margin: EdgeInsets.only(right: 10.0, left: 10.0),
             child: new Text(
-              'Atau',
+              widget.orText != null ? widget.orText : 'Atau',
               style: TextStyle(color: Colors.grey, fontSize: 15.0),
             ),
           ),
@@ -454,18 +456,18 @@ class _RegisterPageState extends State<RegisterPage> {
                       ],
                     ),
                   ),
+                  _isTextLoginShow
+                      ? Container(
+                          margin: EdgeInsets.only(top: 15.0),
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: labelAlreadyAccount,
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
             ),
-            _isTextLoginShow
-                ? Container(
-                    height: MediaQuery.of(context).size.height - 25,
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: labelAlreadyAccount,
-                    ),
-                  )
-                : Container(),
           ],
         ),
       ),
