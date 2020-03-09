@@ -59,6 +59,8 @@ import 'package:neuron_register/neuron_register.dart';
     showLabelInputName: true,
     showLabelInputPhone: true,
     orText: 'Atau',
+    labelAlreadyAccount: 'Sudah Punya Akun?',
+    colorLogin: Colors.red,
   ),
 ```
 
@@ -86,6 +88,8 @@ import 'package:neuron_register/neuron_register.dart';
 | onButtonGoogleTap | Return if button google tapped |
 | onButtonFacebookTap | Return if button facebook tapped |
 | orText | Set or text |
+| labelAlreadyAccount | Set text label login |
+| colorLogin | Set color label login |
 
 
 ## UI

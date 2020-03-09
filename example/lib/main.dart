@@ -63,6 +63,8 @@ class _HomeScreenState extends State<HomeScreen> {
           showLabelInputName: true,
           showLabelInputPhone: true,
           orText: 'Atau',
+          labelAlreadyAccount: 'Sudah Punya Akun?',
+          colorLogin: Colors.red,
         ),
       ),
     );

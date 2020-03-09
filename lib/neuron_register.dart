@@ -25,6 +25,8 @@ class RegisterPage extends StatefulWidget {
   final String assetFacebookButton;
   final String assetGoogleButton;
   final String orText;
+  final String labelAlreadyAccount;
+  final Color colorLogin;
 
   const RegisterPage(
       {Key key,
@@ -49,7 +51,9 @@ class RegisterPage extends StatefulWidget {
       this.buttonGoogleShow,
       this.assetFacebookButton,
       this.assetGoogleButton,
-      this.orText})
+      this.orText,
+      this.labelAlreadyAccount,
+      this.colorLogin})
       : super(key: key);
 
   @override
@@ -310,13 +314,13 @@ class _RegisterPageState extends State<RegisterPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           new Text(
-            'Sudah Punya Akun? ',
+            widget.labelAlreadyAccount !=null ? widget.labelAlreadyAccount : 'Sudah Punya Akun?',
             style: TextStyle(color: Colors.grey),
           ),
           GestureDetector(
             child: new Text(
-              'Login',
-              style: TextStyle(color: Color(0XFF24A5F3)),
+              ' Login',
+              style: TextStyle(color: widget.colorLogin),
             ),
             onTap: () {
               widget.onTextLoginTap(true);
