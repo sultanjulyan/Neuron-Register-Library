@@ -1,7 +1,6 @@
 name: neuron_register
 description: Flutter register package from Neuron with love.
 version: 0.0.1
-author:
 homepage:
 
 environment:
