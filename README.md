@@ -99,3 +99,4 @@ import 'package:neuron_register/neuron_register.dart';
 ## Getting Started
 
 See the example directory for a complete sample app using Neuron Register.
+
